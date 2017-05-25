@@ -1,8 +1,5 @@
-# API Survey - Firebase Messaging
+# API Survey - Facebook Graph API
 
-* What is FCM ?
-* The API for Push Notification
-* The API for Topic Registration
-* The API for Retrieving User's Data
-* Compare the Design of FCM API to RESTful API 
+* Introduction of Facebook Graph API
+* Compare the Design of Facebook Graph API to RESTful API 
     * Pros and Cons
