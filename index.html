@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>API Survey #8 - Facebook Graph API</title>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen-16x10.css">
+</head>
+<body class="shower list">
+	<header class="caption">
+		<h1>API Survey #8 - Facebook Graph API</h1>
+		<p>Cara Wang &lt;caraw@cnyes.com&gt;</p>
+	</header>
+	<section class="slide" id="cover">
+		<h2>API Survey #8</h2>
+		<h3>Facebook Graph API</h3>
+		<div class="author">
+			<p>@author Cara Wang &lt;caraw@cnyes.com&gt;</p>
+			<p>@since 2017/05/25</p>
+		</div>
+		<img src="pictures/cover.jpeg" class="cover">
+		<style>
+			#cover h2 {
+				margin: 14% 0 0;
+				padding: 10px;
+				color:#f0fcfe;
+				text-align:center;
+				font-size:60px;
+				border-width: 5px;
+				border-color: #f0fcfe;
+				border-top-style: solid;
+				border-bottom-style: solid;
+				}
+			#cover h3 {
+				margin: 18% 0 0;
+				color:#f0fcfe;
+				text-align:center;
+				font-size:30px;
+				}
+			.author {
+				margin:10px 230px 0;
+				color:#f0fcfe;
+				font-style:italic;
+				font-size:20px;
+				}
+				.author p {
+					line-height: 10px;
+					text-align:left;
+					}
+				.author p a {
+					color:#f0fcfe;
+					}
+			#cover img {
+				opacity: 0.9;
+			}
+		</style>
+	</section>
+	<section class="slide">
+		<h2>Facebook Graph API</h2>
+		<li class="next">獲取 Facebook 資料的 API</li>
+		<code class="next">https://graph.facebook.com/v2.9/me/feed</code>
+		<code class="next">https://graph.facebook.com/v2.9/1020218_10208537</code>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/graphAPI.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>Facebook Graph API</h2>
+		<li class="next"><mark>物件</mark> 之間的 <mark>關聯</mark>，會形成 Graph</li>
+		<li class="next">物件：獨立可以存在的東西</li>
+		<li class="small next">例如：人、粉絲專頁、社團、活動</li>
+		<li class="next">關聯：依賴於某個物件所存在的東西，透過這個東西可以找到其他物件</li>
+		<li class="small next">例如：貼文、照片、讚、留言</li>
+		<style>
+			.small {
+				margin-left: 10%;
+			}
+		</style>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/object.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/link.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/linkToObj.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/otherObj.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>Facebook Graph API</h2>
+		<li class="next">只有物件和關聯，好像無法做任何事情</li>
+		<li class="next">需要更多細節...</li>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/graphAPIFields.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>Facebook Graph API</h2>
+		<li>只有物件和關聯，好像無法做任何事情</li>
+		<li>需要更多細節...</li>
+		<code class="next">GET /{node}?fields={fields}</code>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/fields.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/fields1.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>RESTful API ?</h2>
+		<code class="next">GET /v2.9/{node}/{edge}?fields={fields}</code>
+		<li class="next">Http Method: <span class="next">使用 GET 取得資料</span></li>
+		<li class="next">Resource Name: <span class="next">有分層關係</span><span class="next">，可以利用 <mark>我要取用 node 的 edge (ex: 使用者 A 的動態資料) </mark> 語意的表達來理解 API Path 會取得的資源</span></li>
+		<li class="next">Response Payload:</li>
+	</section>
+	<section class="slide">
+		<h2>RESTful API ?</h2>
+		<li>Response Payload:</li>
+		<li class="next">沒有送入 <code>fields</code> 參數時，大部份會有 <mark>id</mark> 和 <mark>created_time</mark></li>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/response.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/noCreatedTime.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>RESTful API ?</h2>
+		<li>Response Payload:</li>
+		<li>沒有送入 <code>fields</code> 參數時，大部份會有 <mark>id</mark> 和 <mark>created_time</mark></li>
+		<li class="next">有送入 <code>fields</code> 參數時，一定會有 <mark>id</mark> 和 送入的 fields 欄位</li>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/response1.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/response2.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>RESTful API ?</h2>
+		<li>Response Payload:</li>
+		<li>沒有送入 <code>fields</code> 參數時，大部份會有 <mark>id</mark> 和 <mark>created_time</mark></li>
+		<li>有送入 <code>fields</code> 參數時，一定會有 <mark>id</mark> 和 送入的 fields 欄位</li>
+		<li class="next">只有 {node} 時，Response 格式不會再對資料多包一層 key</li>
+		<li class="next">有 {edge} 在 API Path 上時，會是分頁的 Response 格式，有對資料本身再包一層 key: <code>data</code>，一定有 <code>paging</code> 來放置分頁資訊</li>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/doc.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>RESTful API ?</h2>
+		<li>Response Payload:</li>
+		<li>沒有送入 <code>fields</code> 參數時，大部份會有 <mark>id</mark> 和 <mark>created_time</mark></li>
+		<li>有送入 <code>fields</code> 參數時，一定會有 <mark>id</mark> 和 送入的 fields 欄位</li>
+		<li>有 {edge} 在 API Path 上時，會是分頁的 Response 格式，有對資料本身再包一層 key: <code>data</code>，一定有 <code>paging</code> 來放置分頁資訊</li>
+		<li class="next">錯誤訊息時，有對資料本身再包一層 key: <code>error</code></li>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/error.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>RESTful API ?</h2>
+		<li>Response Payload:</li>
+		<li>沒有送入 <code>fields</code> 參數時，大部份會有 <mark>id</mark> 和 <mark>created_time</mark></li>
+		<li>有送入 <code>fields</code> 參數時，一定會有 <mark>id</mark> 和 送入的 fields 欄位</li>
+		<li>有 {edge} 在 API Path 上時，會是分頁的 Response 格式，有對資料本身再包一層 key: <code>data</code>，一定有 <code>paging</code> 來放置分頁資訊</li>
+		<li>錯誤訊息時，有對資料本身再包一層 key: <code>error</code></li>
+		<li class="next">錯誤訊息包含的資料欄位名稱不盡相同</li>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/error1.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>RESTful API ?</h2>
+		<table>
+			<tr>
+				<th scope="col">Characteristics</th>
+				<th>Yes / No</th>
+			</tr>
+			<tr>
+				<td>Http Method</td>
+				<td>Yes</td>
+			</tr>
+			<tr>
+				<td>Resource Name</td>
+				<td>Yes</td>
+			</tr>
+			<tr>
+				<td>Response Payload</td>
+				<td>Yes</td>
+			</tr>
+		</table>
+	</section>
+	<section class="slide">
+		<h2>Pros and Cons</h2>
+		<ol>
+			<li class="next">
+				Pros
+				<ol>
+					<li class="next">用統一的介面來完成所有類型資料的取得</li>
+					<code class="next">GET /v2.9/{node}/{edge}?fields={fields}</code>
+					<li class="next">支援一次多筆的取得，一樣也是有一致的格式</li>
+					<code class="next">GET /v2.9/{edge}?ids={nodes}&fields={fields}</code>
+					<li class="next">不只是 path，Response Payload 也是一致的介面</li>
+				</ol>
+			</li>
+		</ol>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/mutiple.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/mutiple1.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>Pros and Cons</h2>
+		<ol>
+			<li class="next">
+				Pros
+				<ol>
+					<li>用統一的介面來完成所有類型資料的取得</li>
+					<li class="next">成功時會提供簡潔的 <code>paging</code> 訊息</li>
+				</ol>
+			</li>
+		</ol>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/paging.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>Pros and Cons</h2>
+		<ol>
+			<li>
+				Pros
+				<ol>
+					<li>用統一的介面來完成所有類型資料的取得</li>
+					<li>成功時會提供簡潔的 <code>paging</code> 訊息</li>
+					<li class="next">提供 <code>debug=true</code> 讓使用者可以知道為什麼資料為空</li>
+				</ol>
+			</li>
+		</ol>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/debug.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>Pros and Cons</h2>
+		<ol>
+			<li>
+				Pros
+				<ol>
+					<li>用統一的介面來完成所有類型資料的取得</li>
+					<code>GET /v2.9/{node}/{edge}?fields={fields}</code>
+					<li>成功時會提供簡潔的 <code>paging</code> 訊息</li>
+					<li>提供 <code>debug=true</code> 讓使用者可以知道為什麼資料為空</li>
+					<li class="next">Header <code>WWW-Authenticate</code> 也會包含錯誤訊息</li>
+				</ol>
+			</li>
+		</ol>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/headerMsg.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>Pros and Cons</h2>
+		<ol>
+			<li class="next">
+				Cons
+				<ol>
+					<li class="next">為什麼資料為空時不用 <code>error</code> 的 API Format</li>
+					<li class="next">Http Status 都使用 <code>400 Bad Request</code> 表示錯誤</li>
+				</ol>
+			</li>
+		</ol>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/400not401.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>Pros and Cons</h2>
+		<ol>
+			<li class="next">
+				Cons
+				<ol>
+					<li>為什麼資料為空時不用 <code>error</code> 的 API Format</li>
+					<li>Http Status 都使用 <code>400 Bad Request</code> 表示錯誤</li>
+					<li class="next">自訂 Header 有的大寫有的小寫</li>
+				</ol>
+			</li>
+		</ol>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/customizeHeader.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>cnYes</h2>
+		<li class="next">有些多餘的分頁結構</li>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/cnyesPaging.png">
+		</figure>
+	</section>
+	<section class="slide">
+		<h2>cnYes</h2>
+		<li>有些多餘的分頁結構</li>
+		<li class="next">作為開放的 API 設計，Facebook Graph API 的設計擴充功能容易，無論未來 Facebook 有怎樣的服務產生，都可以當做一個物件來使用 Facebook Graph API</li>
+		<li class="next">作為非開放的 API 設計，要小心單一 API 太過通用，因為需求不是從資料出發，</li>
+	</section>
+	<section class="slide">
+		<figure>
+		    <img class="cover" src="./pictures/demo.png">
+		</figure>
+	</section>
+	<section class="slide" id="end">
+		<h2>Q & A</h2>
+		<img src="pictures/end.jpg" alt="" class="cover">
+		<!--
+			To apply styles to the certain slides
+			set slide ID to get needed elements
+			-->
+		<style>
+			#end h2 {
+				margin: 350px 0 0;
+				padding: 10px;
+				color:#DB2F13;
+				text-align:right;
+				font-size:60px;
+				}
+		</style>
+	</section>
+	<p class="badge">
+		<a href="">Fork me on GitHub</a>
+	</p>
+	<div class="progress"></div>
+	<script src="node_modules/shower-core/shower.min.js"></script>
+</body>
+</html>
